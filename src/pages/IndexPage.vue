@@ -31,7 +31,7 @@ import { ref, onMounted } from 'vue'
 
 const el = ref()
 const handleClick = () => {
-  window.location = `truecallersdk://truesdk/web_verify?requestNonce=${process.env.UNIQUE_REQUEST_ID}&partnerKey=${process.env.YOUR_PARTNER_KEY}&partnerName=${process.env.YOUR_APP_NAME}&lang=${process.env.LANGUAGE_LOCALE}&title=${process.env.TITLE_STRING_OPTION}`;
+  window.location = `truecallersdk://truesdk/web_verify?requestNonce=123123123&partnerKey=fq3Sbba1003078b504910ae04fc3f59560c09&partnerName=KoffeLaDo&lang=en&title=continue`;
 
   setTimeout(function() {
     if( document.hasFocus() ){
