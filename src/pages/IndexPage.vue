@@ -1,6 +1,6 @@
 <template>
   <q-page class="row bg-brown-8">
-    <CoffeeCard
+    <!-- <CoffeeCard
       imgURL="src/assets/black.jpg"
       type="Black"
       direction="LEFT"
@@ -12,7 +12,8 @@
       type="White"
       direction="RIGHT"
       desc=""
-    />
+    /> -->
+    HELLO
   </q-page>
 </template>
 
@@ -25,17 +26,12 @@ export default defineComponent({
 </script>
 
 <script setup>
-import { ref } from "vue";
-import CoffeeCard from "../components/CoffeeCard.vue";
-const temp = ref("Yay");
+import { ref, onMounted } from 'vue'
+
+const el = ref()
+
 onMounted(() => {
-  
-  window.location = "truecallersdk://truesdk/web_verify?
-                               requestNonce=process.env.UNIQUE_REQUEST_ID
-                               &partnerKey=process.env.YOUR_PARTNER_KEY
-                               &partnerName=process.env.YOUR_APP_NAME
-                               &lang=process.env.LANGUAGE_LOCALE
-                               &title=process.env.TITLE_STRING_OPTION";
+  window.location = `truecallersdk://truesdk/web_verify?requestNonce=${process.env.UNIQUE_REQUEST_ID}&partnerKey=${process.env.YOUR_PARTNER_KEY}&partnerName=${process.env.YOUR_APP_NAME}&lang=${process.env.LANGUAGE_LOCALE}&title=${process.env.TITLE_STRING_OPTION}`;
 
   setTimeout(function() {
     if( document.hasFocus() ){
@@ -47,5 +43,6 @@ onMounted(() => {
       // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
     }
   }, 600);
-}),
+
+})
 </script>
