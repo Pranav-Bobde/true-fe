@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row bg-brown-8">
+  <q-page class="flex justify-center items-center">
     <!-- <CoffeeCard
       imgURL="src/assets/black.jpg"
       type="Black"
@@ -13,7 +13,8 @@
       direction="RIGHT"
       desc=""
     /> -->
-    HELLO
+     <q-btn color="white" text-color="black" label="Verify" @click="handleClick" />
+    
   </q-page>
 </template>
 
@@ -29,8 +30,7 @@ export default defineComponent({
 import { ref, onMounted } from 'vue'
 
 const el = ref()
-
-onMounted(() => {
+const handleClick = () => {
   window.location = `truecallersdk://truesdk/web_verify?requestNonce=${process.env.UNIQUE_REQUEST_ID}&partnerKey=${process.env.YOUR_PARTNER_KEY}&partnerName=${process.env.YOUR_APP_NAME}&lang=${process.env.LANGUAGE_LOCALE}&title=${process.env.TITLE_STRING_OPTION}`;
 
   setTimeout(function() {
@@ -43,6 +43,5 @@ onMounted(() => {
       // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
     }
   }, 600);
-
-})
+}
 </script>
