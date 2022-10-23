@@ -28,4 +28,24 @@ export default defineComponent({
 import { ref } from "vue";
 import CoffeeCard from "../components/CoffeeCard.vue";
 const temp = ref("Yay");
+onMounted(() => {
+  
+  window.location = "truecallersdk://truesdk/web_verify?
+                               requestNonce=process.env.UNIQUE_REQUEST_ID
+                               &partnerKey=process.env.YOUR_PARTNER_KEY
+                               &partnerName=process.env.YOUR_APP_NAME
+                               &lang=process.env.LANGUAGE_LOCALE
+                               &title=process.env.TITLE_STRING_OPTION";
+
+  setTimeout(function() {
+    if( document.hasFocus() ){
+      // Truecaller app not present on the device and you redirect the user 
+      // to your alternate verification page
+    }else{
+      // Truecaller app present on the device and the profile overlay opens
+      // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
+      // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
+    }
+  }, 600);
+}),
 </script>
