@@ -20,6 +20,9 @@
       label="Verify"
       @click="handleClick"
     />
+    <pre>
+      {{ data }}
+    </pre>
   </q-page>
 </template>
 
@@ -35,19 +38,24 @@ export default defineComponent({
 import { ref, watch } from "vue";
 const pollData = ref(null);
 let msg = ref(null);
+let data = ref(null);
 
 const handleClick = () => {
   window.location = `truecallersdk://truesdk/web_verify?requestNonce=123123123&partnerKey=fq3Sbba1003078b504910ae04fc3f59560c09&partnerName=KoffeLaDo&lang=en&title=continue`;
 
-  // pollData.value = setInterval(async () => {
-  //   let requestNonce = 123123123;
-  //   let res = await fetch(
-  //     `https://true-be.herokuapp.com/api/getuser/${requestNonce}`
-  //     // `http://localhost:5001/api/getuser/${requestNonce}`
-  //   );
-  //   res = await res.json();
-  //   msg.value = res.msg;
-  // }, 1000);
+  pollData.value = setInterval(async () => {
+    let requestNonce = 123123123;
+    let res = await fetch(
+      `https://true-be.herokuapp.com/api/getuser/${requestNonce}`
+      // `http://localhost:5001/api/getuser/${requestNonce}`
+    );
+    res = await res.json();
+    console.log(res);
+    data.value = res.user;
+    msg.value = res.msg;
+    console.log("data: ", data);
+    console.log("msg: ", msg.value);
+  }, 1500);
 };
 
 watch(
