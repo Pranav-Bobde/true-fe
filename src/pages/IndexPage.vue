@@ -13,8 +13,13 @@
       direction="RIGHT"
       desc=""
     /> -->
-     <q-btn color="white" text-color="black" label="Verify" @click="handleClick" />
-    
+
+    <q-btn
+      color="white"
+      text-color="black"
+      label="Verify"
+      @click="handleClick"
+    />
   </q-page>
 </template>
 
@@ -27,21 +32,30 @@ export default defineComponent({
 </script>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, watch } from "vue";
+const pollData = ref(null);
+let msg = ref(null);
 
-const el = ref()
 const handleClick = () => {
   window.location = `truecallersdk://truesdk/web_verify?requestNonce=123123123&partnerKey=fq3Sbba1003078b504910ae04fc3f59560c09&partnerName=KoffeLaDo&lang=en&title=continue`;
 
-  setTimeout(function() {
-    if( document.hasFocus() ){
-      // Truecaller app not present on the device and you redirect the user 
-      // to your alternate verification page
-    }else{
-      // Truecaller app present on the device and the profile overlay opens
-      // The user clicks on verify & you'll receive the user's access token to fetch the profile on your 
-      // callback URL - post which, you can refresh the session at your frontend and complete the user  verification
+  // pollData.value = setInterval(async () => {
+  //   let requestNonce = 123123123;
+  //   let res = await fetch(
+  //     `https://true-be.herokuapp.com/api/getuser/${requestNonce}`
+  //     // `http://localhost:5001/api/getuser/${requestNonce}`
+  //   );
+  //   res = await res.json();
+  //   msg.value = res.msg;
+  // }, 1000);
+};
+
+watch(
+  () => msg.value,
+  (newMsg, oldMsg) => {
+    if (newMsg === "Success") {
+      clearInterval(pollData.value);
     }
-  }, 600);
-}
+  }
+);
 </script>
