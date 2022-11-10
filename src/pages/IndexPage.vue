@@ -1,17 +1,25 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+    <LoadingScreen :isLoading="isLoading" />
+    <main v-if="!isLoading">
+      <p>Some content</p>
+    </main>
   </q-page>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+// impot loadingscreen
+import LoadingScreen from "../components/LoadingScreen.vue";
+import { ref, onMounted } from "vue";
 
-export default defineComponent({
-  name: 'IndexPage'
-})
+const isLoading = ref(true);
+onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 3000);
+});
+
+// export default defineComponent({
+//   name: "IndexPage",
+// });
 </script>
