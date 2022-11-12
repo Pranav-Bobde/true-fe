@@ -1,6 +1,5 @@
 <template>
-  <q-btn
-    :label="props.children"
+  <button
     :style="background"
     :class="{
       btn: true,
@@ -8,24 +7,18 @@
       dark: props.isDarkBG,
       light: !props.isDarkBG,
     }"
-  />
+  >
+    <slot></slot>
+  </button>
 </template>
 
 <script setup>
 import { computed } from "vue";
 
 const props = defineProps({
-  children: {
-    type: String,
-    required: true,
-  },
   isDarkBG: {
     type: Boolean,
     default: true,
-  },
-  action: {
-    type: Boolean,
-    default: false,
   },
 });
 
@@ -34,13 +27,13 @@ const background = computed(() => "background-color: $" + props.backGround);
 
 <style lang="scss" scoped>
 .btn {
+  position: relative;
   border: none;
   color: $dark;
-  font-family: "Figtree";
-  font-style: normal;
-  border-radius: 1rem;
+  border-radius: 12px;
   padding: 0.75rem 1rem;
 }
+
 .dark {
   color: $light;
   background-color: $accent;

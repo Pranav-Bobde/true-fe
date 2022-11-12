@@ -6,10 +6,16 @@
     <div class="title">{{ props.title }}</div>
     <div class="desc">{{ props.title }}</div>
     <div class="price">{{ props.price }}</div>
-    <button class="btn"><q-icon name="eva-activity-outline" /></button>
+    <ButtonComponent :isDarkBG="true" @click="handleClick"
+      ><q-icon class="btn-content" name="fa-regular fa-plus" size="2.5rem"
+    /></ButtonComponent>
   </div>
 </template>
 <script setup>
+import { useModalStore } from "../stores/modalStore";
+import ButtonComponent from "./ButtonComponent.vue";
+const store = useModalStore();
+
 let props = defineProps({
   title: {
     type: String,
@@ -29,9 +35,14 @@ let props = defineProps({
   },
   imgLeft: {
     type: Boolean,
-    required: true,
+    default: false,
   },
 });
+
+const handleClick = () => {
+  console.log("handleClick");
+  store.toggleModal();
+};
 </script>
 
 <style lang="scss" scoped>
@@ -71,7 +82,6 @@ body {
 }
 .img-container {
   position: absolute;
-
   width: 100px;
   aspect-ratio: 1;
   border-radius: 12px;
@@ -94,14 +104,18 @@ body {
   font-weight: 300;
 }
 .btn {
-  background-color: #104f55;
-  border: none;
+  // background-color: #104f55;
+  // border: none;
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  color: #fff8f0;
-  font-size: 2rem;
-  line-height: 1rem;
+  // color: #fff8f0;
+  // align-items: center;
+}
+.btn-content {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .left {
   align-items: end;
