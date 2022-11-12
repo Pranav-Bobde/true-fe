@@ -1,42 +1,40 @@
-// app global css in SCSS form
 .text-cursive {
-    font-family: "Lobster";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 38px;
+  font-family: "Lobster";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 38px;
+}
+
+.caption {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+// Text Title
+.text-title {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.text {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+
+  @media screen and (max-width: 400px) {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    @media screen and (min-height: 800px) {
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+    }
   }
-  
-  .caption {
-    font-family: "Nunito";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-  }
-  
-  // Text Title
-  .text-title {
-    font-family: "Nunito";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 27px;
-  }
-  
-  .text {
-    font-family: "Figtree";
-    font-style: normal;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 22px;
-  }
-  
-  .btn {
-    border-radius: 15px;
-    font-family: "Figtree";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-  }
-  
+}

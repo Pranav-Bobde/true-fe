@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <div :class="{ loader: true, fadeout: !props.isLoading }">Loading...</div>
-  </div>
+  <q-page class="flex flex-center">
+    <div :class="{ loader: true, fadeout: !props.isLoading }">
+      <img src="../assets/kld-logo.png" alt="Logo" />
+    </div>
+  </q-page>
 </template>
 
 <script setup>
@@ -9,22 +11,19 @@
 const props = defineProps({
   isLoading: Boolean,
 });
-// const isLoad = ref(isLoading);
-// watch(isLoading, (val) => {
-//   isLoad.value = val;
-// });
 </script>
 
-<style>
+<style lang="scss" scoped>
 .loader {
-  background-color: #b49250;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary;
   bottom: 0;
   color: white;
-  display: block;
   font-size: 32px;
   left: 0;
   overflow: hidden;
-  padding-top: 10vh;
   position: fixed;
   right: 0;
   text-align: center;
@@ -32,7 +31,7 @@ const props = defineProps({
 }
 
 .fadeout {
-  animation: fadeout 0.8s forwards;
+  animation: fadeout 0.5s forwards;
 }
 
 @keyframes fadeout {
