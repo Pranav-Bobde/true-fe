@@ -4,17 +4,18 @@
       <img :src="props.img" alt="" />
     </div>
     <div class="title">{{ props.title }}</div>
-    <div class="desc">{{ props.title }}</div>
-    <div class="price">{{ props.price }}</div>
+    <div class="desc">{{ props.desc }}</div>
+    <div class="price">Rs. {{ props.price }}</div>
     <ButtonComponent :isDarkBG="true" @click="handleClick"
       ><q-icon class="btn-content" name="fa-regular fa-plus" size="2.5rem"
     /></ButtonComponent>
   </div>
 </template>
 <script setup>
-import { useModalStore } from "../stores/modalStore";
+import { useMenuStore } from "../stores/menuStore";
 import ButtonComponent from "./ButtonComponent.vue";
-const store = useModalStore();
+
+const store = useMenuStore();
 
 let props = defineProps({
   title: {
@@ -26,7 +27,7 @@ let props = defineProps({
     required: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
   },
   img: {
@@ -40,8 +41,8 @@ let props = defineProps({
 });
 
 const handleClick = () => {
-  console.log("handleClick");
-  store.toggleModal();
+  store.modal.title = props.title;
+  store.openModal();
 };
 </script>
 
@@ -74,7 +75,7 @@ body {
   min-height: 150px;
   gap: 0.4rem;
   border-radius: 12px;
-  padding: 0.8rem 0.8rem 0.6rem 0.6rem;
+  padding: 0.8rem 0.8rem 0.8rem 0.8rem;
   background: #fff8f0;
   box-shadow: -5px 15px 20px -12px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: -5px 15px 20px -12px rgba(0, 0, 0, 0.5);
@@ -93,6 +94,7 @@ body {
 .title {
   font-size: 20px;
   font-weight: 500;
+  width: 160px;
 }
 .desc {
   width: 150px;
@@ -122,6 +124,9 @@ body {
   .img-container {
     top: -1rem;
     left: -1rem;
+  }
+  .title {
+    text-align: right;
   }
   .btn {
     align-self: start;

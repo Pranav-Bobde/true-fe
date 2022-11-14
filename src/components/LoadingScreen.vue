@@ -25,6 +25,7 @@ const props = defineProps({
   left: 0;
   overflow: hidden;
   position: fixed;
+  z-index: 999;
   right: 0;
   text-align: center;
   top: 0;

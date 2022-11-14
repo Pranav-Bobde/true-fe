@@ -1,20 +1,20 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <q-dialog v-model="store.open">
+  <q-dialog v-model="store.modal.show">
     <q-card class="modal">
-      <q-card-section class="row items-center">
-        <span class="text q-ml-sm">{{ props.text }}</span>
+      <q-card-section class="row text-center items-center">
+        <span class="text q-ml-sm">Confirm {{ store.modal.title }} ?</span>
       </q-card-section>
 
       <q-card-actions class="btn-group">
         <ButtonComponent
-          @click="store.toggleModal"
+          @click="store.closeModal"
           :isDarkBG="false"
           children="No"
           >no</ButtonComponent
         >
         <ButtonComponent
-          @click="store.toggleModal"
+          @click="store.closeModal"
           :isDarkBG="true"
           children="Yes"
           >yes</ButtonComponent
@@ -26,16 +26,9 @@
 
 <script setup>
 import ButtonComponent from "./ButtonComponent.vue";
-import { useModalStore } from "../stores/modalStore";
+import { useMenuStore } from "../stores/menuStore";
 
-const props = defineProps({
-  text: {
-    type: String,
-    required: true,
-  },
-});
-
-const store = useModalStore();
+const store = useMenuStore();
 </script>
 
 <style scoped>
@@ -44,7 +37,7 @@ const store = useModalStore();
   flex-direction: column;
   justify-content: center;
   border-radius: 15px;
-  height: 150px;
+  min-height: 150px;
   width: 250px;
 }
 .btn-group {

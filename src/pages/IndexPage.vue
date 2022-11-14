@@ -3,36 +3,38 @@
     <LoadingScreen :isLoading="isLoading" />
     <main class="container" v-if="!isLoading">
       <CardComponent
-        title="White Coffee"
-        desc="White Coffee"
-        img="src\assets\white-coffee.jpg"
-        price="Rs 0"
-        imgLeft
-      />
-      <CardComponent
-        title="Black Coffee"
-        desc="Black Coffee"
-        img="src\assets\black-coffee.jpg"
-        price="Rs 0"
-      />
-      <ModalComponentVue text="Confirm White Coffee?" />
-      <ModalComponentVue text="Confirm White Coffee?" />
+        v-for="item in store.menu"
+        :key="item.id"
+        :title="item.name"
+        :desc="item.description"
+        :img="item.image"
+        :price="item.price"
+        :imgLeft="getImgPos()"
+      ></CardComponent>
+      <ModalComponent />
     </main>
   </q-page>
 </template>
 
 <script setup>
 import LoadingScreen from "../components/LoadingScreen.vue";
+import { useMenuStore } from "../stores/menuStore";
 import { ref, onMounted } from "vue";
 import CardComponent from "src/components/CardComponent.vue";
-import ModalComponentVue from "src/components/ModalComponent.vue";
-
+import ModalComponent from "src/components/ModalComponent.vue";
+const store = useMenuStore();
+const index = ref(0);
 const isLoading = ref(true);
 onMounted(() => {
   setTimeout(() => {
     isLoading.value = false;
   }, 1500);
 });
+
+const getImgPos = () => {
+  index.value++;
+  return index.value % 2 === 0;
+};
 </script>
 
 <style lang="scss" scoped>
