@@ -5,6 +5,7 @@
       <CardComponent
         v-for="item in store.menu"
         :key="item.id"
+        :id="item.id"
         :title="item.name"
         :desc="item.description"
         :img="item.image"
@@ -12,6 +13,7 @@
         :imgLeft="getImgPos()"
       ></CardComponent>
       <ModalComponent />
+      <FooterComponent />
     </main>
   </q-page>
 </template>
@@ -22,10 +24,12 @@ import { useMenuStore } from "../stores/menuStore";
 import { ref, onMounted } from "vue";
 import CardComponent from "src/components/CardComponent.vue";
 import ModalComponent from "src/components/ModalComponent.vue";
+import FooterComponent from "src/components/FooterComponent.vue";
 const store = useMenuStore();
 const index = ref(0);
 const isLoading = ref(true);
 onMounted(() => {
+  store.fetchMenu();
   setTimeout(() => {
     isLoading.value = false;
   }, 1500);

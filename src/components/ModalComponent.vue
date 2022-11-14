@@ -7,17 +7,11 @@
       </q-card-section>
 
       <q-card-actions class="btn-group">
-        <ButtonComponent
-          @click="store.closeModal"
-          :isDarkBG="false"
-          children="No"
-          >no</ButtonComponent
+        <ButtonComponent @click="store.closeModal" :isDarkBG="false"
+          >NO</ButtonComponent
         >
-        <ButtonComponent
-          @click="store.closeModal"
-          :isDarkBG="true"
-          children="Yes"
-          >yes</ButtonComponent
+        <ButtonComponent @click="handleClick" :isDarkBG="true"
+          >YES</ButtonComponent
         >
       </q-card-actions>
     </q-card>
@@ -29,6 +23,12 @@ import ButtonComponent from "./ButtonComponent.vue";
 import { useMenuStore } from "../stores/menuStore";
 
 const store = useMenuStore();
+
+function handleClick() {
+  store.addToCart(store.modal.id);
+  store.closeModal();
+  // TODO - Add logic for truecaller login and post order object to aws.
+}
 </script>
 
 <style scoped>

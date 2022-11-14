@@ -70,7 +70,7 @@ module.exports = configure(function (/* ctx */) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        API: 'https://0mvx4fycm0.execute-api.ap-south-1.amazonaws.com/menu',
+        API: 'https://0mvx4fycm0.execute-api.ap-south-1.amazonaws.com/menu/v1/menu',
         KEY: 'AXuwRBWgER80ozhhZxgT51acVdwZ4KmK5hCq7zcT'
       },
       // rawDefine: {}

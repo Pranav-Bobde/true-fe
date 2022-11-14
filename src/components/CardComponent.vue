@@ -18,6 +18,10 @@ import ButtonComponent from "./ButtonComponent.vue";
 const store = useMenuStore();
 
 let props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -27,7 +31,7 @@ let props = defineProps({
     required: true,
   },
   price: {
-    type: Number,
+    type: String,
     required: true,
   },
   img: {
@@ -42,6 +46,7 @@ let props = defineProps({
 
 const handleClick = () => {
   store.modal.title = props.title;
+  store.modal.id = props.id;
   store.openModal();
 };
 </script>
