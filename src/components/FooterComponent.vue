@@ -1,7 +1,7 @@
 <template>
   <q-footer elevated>
-    <q-toolbar align="center">
-      <q-toolbar-title>It's all free!</q-toolbar-title>
+    <q-toolbar class="text" align="center">
+      <q-toolbar-title><slot></slot></q-toolbar-title>
     </q-toolbar>
   </q-footer>
 </template>

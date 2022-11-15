@@ -13,7 +13,7 @@
         :imgLeft="getImgPos()"
       ></CardComponent>
       <ModalComponent />
-      <FooterComponent />
+      <FooterComponent>It's all free!</FooterComponent>
     </main>
   </q-page>
 </template>
