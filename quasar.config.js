@@ -69,7 +69,10 @@ module.exports = configure(function (/* ctx */) {
       // publicPath: '/',
       // analyze: true,
       env: {
-        API: 'https://0mvx4fycm0.execute-api.ap-south-1.amazonaws.com/menu/v1/menu',
+        MENU_GET_API: 'https://0mvx4fycm0.execute-api.ap-south-1.amazonaws.com/menu/v1/menu',
+        FEEDBACK_GET_API: "https://tclquz2g47.execute-api.ap-south-1.amazonaws.com/feedback/v1/questions",
+        FEEDBACK_POST_API: "https://tclquz2g47.execute-api.ap-south-1.amazonaws.com/feedback/v1/feedback",
+        USER_API: "https://z1c7qbd1di.execute-api.ap-south-1.amazonaws.com/user/v1/user/",
         KEY: 'AXuwRBWgER80ozhhZxgT51acVdwZ4KmK5hCq7zcT'
       },
       // rawDefine: {}
