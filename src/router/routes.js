@@ -3,11 +3,29 @@ const routes = [
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/IndexPage.vue") },
-      { path: "/menu", component: () => import("pages/MenuPage.vue") },
-      { path: "/order", component: () => import("pages/OrderPage.vue") },
-      { path: "/feedback", component: () => import("pages/FeedbackPage.vue") },
-      { path: "/thankyou", component: () => import("pages/ThankYouPage.vue") },
+      {
+        path: "",
+        name: "home",
+        component: () => import("pages/IndexPage.vue"),
+      },
+
+      {
+        path: "/order",
+        name: "order",
+        component: () => import("pages/OrderPage.vue"),
+      },
+
+      {
+        path: "/feedback",
+        name: "feedback",
+        component: () => import("pages/FeedbackPage.vue"),
+      },
+
+      {
+        path: "/thankyou",
+        name: "thankyou",
+        component: () => import("pages/ThankYouPage.vue"),
+      },
     ],
   },
 
