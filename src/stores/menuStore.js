@@ -77,7 +77,7 @@ export const useMenuStore = defineStore('menu', {
       this.modal.show = true;
     },
     async fetchMenu() {
-      const response = await fetch(process.env.API, {
+      const response = await fetch(process.env.MENU_GET_API, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
