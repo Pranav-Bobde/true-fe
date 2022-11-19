@@ -6,6 +6,7 @@
 
 # MAC
 .DS_Store
+src/.DS_Store
 
 # Private Node Modules
 node_modules/
