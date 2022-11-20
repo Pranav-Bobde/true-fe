@@ -41,7 +41,7 @@ export const useFeedbackStore = defineStore('feedback', {
   },
   actions: {
     async fetchFeedback() {
-      const response = await fetch(process.env.API, {
+      const response = await fetch(process.env.FEEDBACK_GET_API, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -57,14 +57,18 @@ export const useFeedbackStore = defineStore('feedback', {
       }
     },
     async postAnswer() {
-      const response = await fetch(process.env.APIPOST, {
+      const response = await fetch(process.env.FEEDBACK_POST_API, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'x-api-key': process.env.KEY
         },
-        // body: JSON.stringify({ a: 1, b: 'Textual content' })
-        body: JSON.stringify(this.ans)
+        body: JSON.stringify(
+          {
+            "answers": this.ans,
+            "user_id": "1234590"
+          }
+        )
       });
       const data = await response.json();
       console.log(data);
