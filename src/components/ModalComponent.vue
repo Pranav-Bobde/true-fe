@@ -21,12 +21,13 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useMenuStore } from "../stores/menuStore";
-import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "vue-router";
 import { useUserStore } from "src/stores/user-store";
 import ButtonComponent from "./ButtonComponent.vue";
 import { updateUserStatus } from "src/functions/updateUsetStatus";
+import { useQuasar } from "quasar";
 
+const $q = useQuasar();
 const menuStore = useMenuStore();
 const userStore = useUserStore();
 const interval = ref(null);
@@ -37,20 +38,9 @@ const order = ref(null);
 function handleClick() {
   menuStore.addToCart(menuStore.modal.id);
   menuStore.closeModal();
-  const is_IOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  if (is_IOS) {
-    // Manual
-  } else {
-    order.value = {
-      id: uuidv4(),
-      order: menuStore.order,
-      total: menuStore.total,
-      time: new Date().toLocaleString(),
-    };
 
-    // console.log("Order: ", order);
-
+  console.log("IsAndroid: ", $q.platform.is.android);
+  if ($q.platform.is.android) {
     // window.location = `truecallersdk://truesdk/web_verify?requestNonce=${order.id}&partnerKey=fq3Sbba1003078b504910ae04fc3f59560c09&partnerName=KoffeLaDo&lang=en&title=continue`;
 
     interval.value = setInterval(async () => {
@@ -70,44 +60,60 @@ function handleClick() {
       console.log("storeUser: ", userStore.getUser);
       clearInterval(interval.value);
     }, 1500);
+  } else {
+    // TODO: Manual Form
   }
+}
 
-  watch(
-    () => user.value,
-    async (newUser, oldUser) => {
-      if (newUser) {
-        let updatedStatus = await updateUserStatus(
-          user.value.id,
-          process.env.STATUS_USER_CONFIRMED
-        );
+watch(
+  () => user.value,
+  async (newUser, oldUser) => {
+    if (newUser) {
+      let updatedStatus = await updateUserStatus(
+        user.value.id,
+        process.env.STATUS_USER_CONFIRMED
+      );
 
-        console.log("ModalUpdatedStatus: ", updatedStatus);
+      console.log("ModalUpdatedStatus: ", updatedStatus);
 
-        window.localStorage.setItem("id", user.value.id);
-        window.localStorage.setItem(
-          "user_status",
-          statusUpdated["updated"]["Attributes"]["user_status"]
-        );
+      window.localStorage.setItem("id", user.value.id);
+      window.localStorage.setItem(
+        "user_status",
+        updatedStatus["updated"]["Attributes"]["user_status"]
+      );
 
-        console.log(
-          "lsId,status: ",
-          window.localStorage.getItem("id"),
-          window.localStorage.getItem("user_status")
-        );
+      console.log(
+        "lsId,status: ",
+        window.localStorage.getItem("id"),
+        window.localStorage.getItem("user_status")
+      );
 
-        clearInterval(interval.value);
+      clearInterval(interval.value);
 
-        // TODO -  post order to db
+      order.value = {
+        ...menuStore.order,
+        user_id: userStore.user.id,
+        total: menuStore.order.orders_list[0].price,
+      };
 
-        if (updatedStatus) {
-          router.push({ path: "/order" });
-        } else {
-          // TODO - Handle error
-        }
+      console.log("Order: ", order.value);
+      const res = await fetch(process.env.ORDERS_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.KEY,
+        },
+        body: JSON.stringify(order.value),
+      });
+
+      if (updatedStatus) {
+        router.push({ path: "/order" });
+      } else {
+        // TODO - Handle error
       }
     }
-  );
-}
+  }
+);
 </script>
 
 <style scoped>
