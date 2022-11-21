@@ -23,9 +23,9 @@
         :name="ques.name"
         class="column no-wrap flex-center"
       >
-        <q-icon
-          name="style"
-          size="56px"
+        <q-icon 
+          name="style" 
+          size="56px" 
         />
         <div class="q-mt-md text-center">
           {{ ques.question }}
@@ -50,13 +50,11 @@
 
         <FooterComponent
           v-if="slide === store.feedback.length"
-          @click="store.postAnswer()"
+          @click="handleSubmit"
         >
           Submit
         </FooterComponent>
-        <FooterComponent v-else>
-          Swipe
-        </FooterComponent>
+        <FooterComponent v-else> Swipe </FooterComponent>
       </q-carousel-slide>
     </q-carousel>
   </q-page>
@@ -66,20 +64,30 @@
 import FooterComponent from "src/components/FooterComponent.vue";
 import { useFeedbackStore } from "../stores/feedback-store";
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const slide = ref(1);
+const post = ref("");
 
 const store = useFeedbackStore();
+
 onMounted(() => {
   store.fetchFeedback();
 });
-const slide = ref(1);
-const post = ref("");
+
+const handleSubmit = async () => {
+  await store.postAnswer();
+  router.push({ path: "/thankyou" });
+};
+
 const beforeTransition = () => {
   post.value = "";
 };
+
 const handleClick = (id, post) => {
   store.feedbackAnswer(id, post);
 };
-
 </script>
 <style lang="scss" scoped>
 .main-page {
