@@ -4,7 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 export const useMenuStore = defineStore("menu", {
   state: () => ({
     menu: null,
-    modal: {
+    formModal: {
+      show: false,
+    },
+    confirmModal: {
       show: false,
       title: "",
       id: "",
@@ -26,11 +29,17 @@ export const useMenuStore = defineStore("menu", {
       };
       console.log("Store: ", this.order);
     },
-    closeModal() {
-      this.modal.show = false;
+    closeFormModal() {
+      this.formModal.show = false;
     },
-    openModal() {
-      this.modal.show = true;
+    openFormModal() {
+      this.formModal.show = true;
+    },
+    closeConfirmModal() {
+      this.confirmModal.show = false;
+    },
+    openConfirmModal() {
+      this.confirmModal.show = true;
     },
     async fetchMenu() {
       const response = await fetch(process.env.MENU_GET_API, {

@@ -13,6 +13,7 @@
         :imgLeft="getImgPos()"
       ></CardComponent>
       <ModalComponent />
+      <UserForm />
       <FooterComponent>It's all free!</FooterComponent>
     </main>
   </q-page>
@@ -25,14 +26,17 @@ import { ref, onMounted } from "vue";
 import CardComponent from "src/components/CardComponent.vue";
 import ModalComponent from "src/components/ModalComponent.vue";
 import FooterComponent from "src/components/FooterComponent.vue";
+import UserForm from "src/components/Form/UserForm.vue";
+
 const store = useMenuStore();
 const index = ref(0);
 const isLoading = ref(true);
-onMounted(() => {
-  store.fetchMenu();
+
+onMounted(async () => {
+  await store.fetchMenu();
   setTimeout(() => {
     isLoading.value = false;
-  }, 1500);
+  }, 1000);
 });
 
 const getImgPos = () => {

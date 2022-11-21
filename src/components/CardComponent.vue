@@ -14,7 +14,9 @@
 <script setup>
 import { useMenuStore } from "../stores/menuStore";
 import ButtonComponent from "./ButtonComponent.vue";
+import { useQuasar } from "quasar";
 
+const $q = useQuasar();
 const store = useMenuStore();
 
 let props = defineProps({
@@ -45,9 +47,9 @@ let props = defineProps({
 });
 
 const handleClick = () => {
-  store.modal.title = props.title;
-  store.modal.id = props.id;
-  store.openModal();
+  store.confirmModal.title = props.title;
+  store.confirmModal.id = props.id;
+  store.openConfirmModal();
 };
 </script>
 

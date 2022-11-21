@@ -1,13 +1,13 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-  <q-dialog v-model="menuStore.modal.show">
+  <q-dialog v-model="menuStore.confirmModal.show">
     <q-card class="modal">
       <q-card-section class="row text-center items-center">
-        <span class="text q-ml-sm">Confirm {{ menuStore.modal.title }} ?</span>
+        <span class="text q-ml-sm">Confirm {{ menuStore.confirmModal.title }} ?</span>
       </q-card-section>
 
       <q-card-actions class="btn-group">
-        <ButtonComponent @click="menuStore.closeModal" :isDarkBG="false">
+        <ButtonComponent @click="menuStore.closeConfirmModal" :isDarkBG="false">
           NO
         </ButtonComponent>
         <ButtonComponent @click="handleClick" :isDarkBG="true">
@@ -36,8 +36,8 @@ const user = ref(null);
 const order = ref(null);
 
 function handleClick() {
-  menuStore.addToCart(menuStore.modal.id);
-  menuStore.closeModal();
+  menuStore.addToCart(menuStore.confirmModal.id);
+  menuStore.closeConfirmModal();
 
   console.log("IsAndroid: ", $q.platform.is.android);
   if ($q.platform.is.android) {
@@ -61,7 +61,7 @@ function handleClick() {
       clearInterval(interval.value);
     }, 1500);
   } else {
-    // TODO: Manual Form
+    menuStore.openFormModal();
   }
 }
 
