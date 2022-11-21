@@ -73,6 +73,7 @@ module.exports = configure(function (/* ctx */) {
         FEEDBACK_GET_API: "https://tclquz2g47.execute-api.ap-south-1.amazonaws.com/feedback/v1/questions",
         FEEDBACK_POST_API: "https://tclquz2g47.execute-api.ap-south-1.amazonaws.com/feedback/v1/feedback",
         USER_API: "https://z1c7qbd1di.execute-api.ap-south-1.amazonaws.com/user/v1/user",
+        ORDERS_API: "https://z1c7qbd1di.execute-api.ap-south-1.amazonaws.com/user/v1/order",
         KEY: 'AXuwRBWgER80ozhhZxgT51acVdwZ4KmK5hCq7zcT',
         STATUS_USER_CONFIRMED: "1",
         STATUS_FEEDBACK_LEFT: "2",
