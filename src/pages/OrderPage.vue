@@ -40,11 +40,21 @@ export default {
 
 <script setup>
 import { useRouter } from "vue-router";
+import { updateUserStatus } from "src/functions/updateUsetStatus";
 
 const router = useRouter();
 
-const giveFeedback = () => {
-  router.push({ path: "/feedback" });
+const giveFeedback = async () => {
+  const updatedStatus = await updateUserStatus(
+    window.localStorage.getItem("id"),
+    process.env.STATUS_FEEDBACK_LEFT
+  );
+  console.log("OrderPageStatus: ", updatedStatus);
+  if (updatedStatus) {
+    router.push("/feedback");
+  } else {
+    // TODO - Handle error
+  }
 };
 </script>
 
