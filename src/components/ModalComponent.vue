@@ -28,6 +28,7 @@ import { useUserStore } from "src/stores/user-store";
 import ButtonComponent from "./ButtonComponent.vue";
 import { updateUserStatus } from "src/functions/updateUsetStatus";
 import { useQuasar } from "quasar";
+import { v4 as uuidv4 } from "uuid";
 
 const $q = useQuasar();
 const menuStore = useMenuStore();
@@ -43,10 +44,12 @@ function handleClick() {
 
   console.log("IsAndroid: ", $q.platform.is.android);
   if ($q.platform.is.android) {
-    // window.location = `truecallersdk://truesdk/web_verify?requestNonce=${order.id}&partnerKey=fq3Sbba1003078b504910ae04fc3f59560c09&partnerName=KoffeLaDo&lang=en&title=continue`;
+    const newUserId = uuidv4();
+
+    window.location = `truecallersdk://truesdk/web_verify?requestNonce=${newUserId}&partnerKey=${process.env.PARTNER_KEY}&partnerName=KoffeLaDo&lang=en&title=continue`;
 
     interval.value = setInterval(async () => {
-      let res = await fetch(process.env.USER_API + "/1", {
+      let res = await fetch(process.env.USER_API + "/" + newUserId, {
         method: "GET",
         headers: {
           "x-api-key": process.env.KEY,

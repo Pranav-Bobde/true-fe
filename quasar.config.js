@@ -74,10 +74,12 @@ module.exports = configure(function (/* ctx */) {
         FEEDBACK_POST_API: "https://tclquz2g47.execute-api.ap-south-1.amazonaws.com/feedback/v1/feedback",
         USER_API: "https://z1c7qbd1di.execute-api.ap-south-1.amazonaws.com/user/v1/user",
         ORDERS_API: "https://z1c7qbd1di.execute-api.ap-south-1.amazonaws.com/user/v1/order",
-        KEY: 'AXuwRBWgER80ozhhZxgT51acVdwZ4KmK5hCq7zcT',
         STATUS_USER_CONFIRMED: "1",
         STATUS_FEEDBACK_LEFT: "2",
         STATUS_FEEDBACK_COMPLETE: "3",
+        KEY: "AXuwRBWgER80ozhhZxgT51acVdwZ4KmK5hCq7zcT",
+        PARTNER_KEY: "fq3Sbba1003078b504910ae04fc3f59560c09"
+
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
