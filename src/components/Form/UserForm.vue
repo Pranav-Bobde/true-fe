@@ -86,7 +86,15 @@ const handleSubmit = async () => {
     updatedStatus["updated"]["Attributes"]["user_status"]
   );
 
-  router.push("/order");
+  if (updatedStatus["updated"]) {
+    router.push({ path: "/order" });
+  } else {
+    $q.notify({
+      message: "Something went wrong, please try again",
+      color: "negative",
+      position: "bottom",
+    });
+  }
 };
 
 onMounted(() => {

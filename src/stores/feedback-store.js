@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { updateUserStatus } from "src/functions/updateUsetStatus"
 
 export const useFeedbackStore = defineStore('feedback', {
   state: () => ({
@@ -74,10 +73,8 @@ export const useFeedbackStore = defineStore('feedback', {
       });
       const data = await response.json();
 
-      const statusUpdated = await updateUserStatus(id, process.env.STATUS_FEEDBACK_COMPLETE);
-      console.log("statusUpdated: ", statusUpdated);
-
-      console.log(data);
+      console.log("Data: ", data);
+      return data;
     }
 
   },

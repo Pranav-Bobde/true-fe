@@ -3,7 +3,9 @@
   <q-dialog v-model="menuStore.confirmModal.show">
     <q-card class="modal">
       <q-card-section class="row text-center items-center">
-        <span class="text q-ml-sm">Confirm {{ menuStore.confirmModal.title }} ?</span>
+        <span class="text q-ml-sm"
+          >Confirm {{ menuStore.confirmModal.title }} ?</span
+        >
       </q-card-section>
 
       <q-card-actions class="btn-group">
@@ -106,10 +108,14 @@ watch(
         body: JSON.stringify(order.value),
       });
 
-      if (updatedStatus) {
+      if (updatedStatus["updated"]) {
         router.push({ path: "/order" });
       } else {
-        // TODO - Handle error
+        $q.notify({
+          message: "Something went wrong, please try again",
+          color: "negative",
+          position: "bottom",
+        });
       }
     }
   }

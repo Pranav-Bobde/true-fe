@@ -23,10 +23,7 @@
         :name="ques.name"
         class="column no-wrap flex-center"
       >
-        <q-icon 
-          name="style" 
-          size="56px" 
-        />
+        <q-icon name="style" size="56px" />
         <div class="q-mt-md text-center">
           {{ ques.question }}
 
@@ -65,6 +62,7 @@ import FooterComponent from "src/components/FooterComponent.vue";
 import { useFeedbackStore } from "../stores/feedback-store";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { updateUserStatus } from "src/functions/updateUsetStatus";
 
 const router = useRouter();
 const slide = ref(1);
@@ -77,8 +75,23 @@ onMounted(() => {
 });
 
 const handleSubmit = async () => {
-  await store.postAnswer();
-  router.push({ path: "/thankyou" });
+  let res = await store.postAnswer();
+
+  if (res.ResponseMetadata.HTTPStatusCode === 200) {
+    const id = window.localStorage.getItem("id");
+    const updatedStatus = await updateUserStatus(
+      id,
+      process.env.STATUS_FEEDBACK_COMPLETE
+    );
+
+    router.push({ path: "/thankyou" });
+  } else {
+    $q.notify({
+      message: "Something went wrong, please try again",
+      color: "negative",
+      position: "bottom",
+    });
+  }
 };
 
 const beforeTransition = () => {

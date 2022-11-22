@@ -1,20 +1,14 @@
 <template>
   <div class="page q-px-xl">
-    <hr>
+    <hr />
     <div class="text-center q-px-xl text text-dark">
       Hey, thanks for ordering, show the confirmation code to the server.
     </div>
 
-    <div class="order_id text-title">
-      A23UBF
-    </div>
+    <div class="order_id text-title">A23UBF</div>
 
     <div class="bg-white q-px-md">
-      <img
-        src="../assets/kld-logo.png"
-        alt="kld-image"
-        class="kld-img"
-      >
+      <img src="../assets/kld-logo.png" alt="kld-image" class="kld-img" />
     </div>
 
     <div class="text-center text text-dark">
@@ -49,11 +43,17 @@ const giveFeedback = async () => {
     window.localStorage.getItem("id"),
     process.env.STATUS_FEEDBACK_LEFT
   );
+
   console.log("OrderPageStatus: ", updatedStatus);
-  if (updatedStatus) {
-    router.push("/feedback");
+
+  if (updatedStatus["updated"]) {
+    router.push({ path: "/feedback" });
   } else {
-    // TODO - Handle error
+    $q.notify({
+      message: "Something went wrong, please try again",
+      color: "negative",
+      position: "bottom",
+    });
   }
 };
 </script>
